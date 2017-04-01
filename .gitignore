@@ -1,1 +1,7 @@
-*
+/*
+
+!/apt
+/apt/*
+!/apt/sources.list.d
+/apt/sources.list.d/*
+!/apt/sources.list.d/*.list
