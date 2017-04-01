@@ -5,7 +5,7 @@ etc directory files
 
 > **Note:** all existing files will be overwritten!
 
-Init an empty repository, link it with the existing repository, get metadata, force checkout and set the upstream branch:
+As a `root` init an empty repository, link it with the existing repository, get metadata, force checkout and set the upstream branch:
 
 ```bash
 cd /etc
@@ -15,18 +15,18 @@ git fetch
 git checkout -ft origin/master
 ```
 
-Separate `.git` from working tree:
+Store metadata on a reliable partition not affected on OS reinstall:
 
 ```bash
-dir="${XDG_CONFIG_HOME:-$HOME/.config}/git"
-mkdir -p $dir && mv .git "$dir/etc"
+dir="${XDG_CONFIG_HOME:-$HOME/.config}/tuxcfg"
+mkdir -p "$dir" && mv .git "$dir/etc" && ln -s "$dir/etc" .git
 ```
 
 Add local system files and configs (extend this list with your own configs):
 
 ```bash
-git-etc add -f hostname hosts machine-id apt/sources.list.d/*.list ssh/*_key* ssh/ssh_config
-git-etc commit -m "add system files"
+git add *
+git commit -m "add system files"
 ```
 
 
@@ -35,14 +35,17 @@ git-etc commit -m "add system files"
 Get metadata from a remote repository, verify the difference and apply:
 
 ```bash
-git-etc fetch
-git-etc diff ..origin/master
-git-etc merge
+cd /etc
+git fetch
+git diff ..origin/master
+git merge
 ```
 
 
-## Deploy after system reinstall ##
+## OS post-install deployment ##
 
 ```bash
-git-etc checkout -f
+cd /etc
+ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/tuxcfg/etc" .git
+git checkout -f
 ```
