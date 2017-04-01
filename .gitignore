@@ -7,3 +7,7 @@
 !/apt/sources.list.d/*.list
 
 !/ssh
+
+!/hostname
+!/hosts
+!/machine-id
