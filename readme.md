@@ -1,8 +1,7 @@
 etc directory files
 ===================
 
-
-## Installation ##
+## Initial deployment ##
 
 > **Note:** all existing files will be overwritten!
 
@@ -16,11 +15,18 @@ git fetch
 git checkout -ft origin/master
 ```
 
-Separate .git from working tree:
+Separate `.git` from working tree:
 
 ```bash
-mkdir -p ~/.config/git
-mv /etc/.git ~/.config/git/etc
+dir="${XDG_CONFIG_HOME:-$HOME/.config}/git"
+mkdir -p $dir && mv .git "$dir/etc"
+```
+
+Add local system files and configs (extend this list with your own configs):
+
+```bash
+git-etc add -f hostname hosts machine-id apt/sources.list.d/*.list ssh/*_key* ssh/ssh_config
+git-etc commit -m "add system files"
 ```
 
 
@@ -31,5 +37,12 @@ Get metadata from a remote repository, verify the difference and apply:
 ```bash
 git-etc fetch
 git-etc diff ..origin/master
-git-etc pull
+git-etc merge
+```
+
+
+## Deploy after system reinstall ##
+
+```bash
+git-etc checkout -f
 ```
