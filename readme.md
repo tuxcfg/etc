@@ -44,8 +44,16 @@ git merge
 
 ## OS post-install deployment ##
 
+Restore git link:
+
 ```bash
 cd /etc
 ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/tuxcfg/etc" .git
 git checkout -f
+```
+
+Enable systemd services:
+
+```bash
+systemctl enable bind-root.mount
 ```
