@@ -55,5 +55,5 @@ git checkout -f
 Enable systemd services:
 
 ```bash
-systemctl enable bind-root.mount
+systemctl enable root.mount
 ```
