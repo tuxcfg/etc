@@ -1,1 +1,3 @@
-DPkg::Post-Invoke { "ls -AlRi --full-time /boot/ > /root/boot.list && tar --create --absolute-names --sort=name /boot | sha256sum > /root/boot.hash && echo boot files hash: `cat /root/boot.hash`"; };
+DPkg::Post-Invoke {
+    "ls -AlRi --full-time /boot/ > /root/boot.list && tar --create --absolute-names --sort=name /boot | sha256sum > /root/boot.hash && echo boot files hash: `cat /root/boot.hash`";
+};
