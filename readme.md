@@ -48,12 +48,21 @@ Restore git link:
 
 ```bash
 cd /etc
+# before root mount this path does not exist
 ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/tuxcfg/etc" .git
-git checkout -f
+# use actual path
+git --git-dir="/home/root/.config/tuxcfg/etc" checkout -f
+```
+
+Restore correct SSH keys permissions after checkout:
+
+```bash
+chmod 600 /etc/ssh/ssh_host_*_key
 ```
 
 Enable systemd services:
 
 ```bash
 systemctl enable root.mount
+systemctl start root.mount
 ```
