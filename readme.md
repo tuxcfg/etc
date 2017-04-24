@@ -60,6 +60,17 @@ Restore correct SSH keys permissions after checkout:
 chmod 600 /etc/ssh/ssh_host_*_key
 ```
 
+Generating the SSH moduli file:
+
+```bash
+# initial candidate generation pass
+ssh-keygen -G moduli.candidates -b 4096
+# second primality testing pass
+ssh-keygen -T /etc/ssh/moduli -f moduli.candidates
+# clear temp file
+rm moduli.candidates
+```
+
 Enable systemd services:
 
 ```bash
