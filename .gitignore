@@ -7,6 +7,8 @@
 !/apt/sources.list.d/*.list
 
 !/ssh
+/ssh/*
+!/ssh/ssh_host_*
 
 !/hostname
 !/hosts
